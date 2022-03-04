@@ -1,14 +1,21 @@
-# Autograding Example: Java
-This example project is written in Java, and tested with Gradle/JUnit.
+# 課題 6-3: APIの利用
+キーボードから入力された英文（1文）を半角スペースあるいはタブを区切りとして
+分割して表示するプログラムを作成しなさい。
+ただし、java.utilパッケージのクラスを使用すること。
 
-### The assignment
-The tests are currently failing because of an output mismatch. Fixing the `System.out.println` in the main method will make the tests green.
+(利用しているjavaのバージョンに合わせたAPIリファレンスを参照すること)
+https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/util/package-summary.html
 
-### Setup command
-N/A
-
-### Run command
-`gradle test`
-
-### Notes
-- The JDK is installed on GitHub Actions machines, so you're also able to directly invoke `javac`, `java`, or any other CLI command included in the JDK. 
+### 実行例
+英文を入力してください
+To be, or not to be, this is the question.
+To
+be,
+or
+not
+to
+be,
+this
+is
+the
+question.
