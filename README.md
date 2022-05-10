@@ -8,8 +8,7 @@ https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/util/package-summar
 
 ### 実行例
 ```
-英文を入力してください
-To be, or not to be, this is the question.
+英文を入力してください：To be, or not to be, this is the question.
 To
 be,
 or
