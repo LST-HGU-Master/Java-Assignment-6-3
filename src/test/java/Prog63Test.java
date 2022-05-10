@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import java.io.*;
+import static org.junit.jupiter.api.Assertions.*;
 /**
  * @version (20220510)
  **/
@@ -109,6 +110,25 @@ public class Prog63Test {
             after();
               AssertionError asErr = new AssertionError("適切なAPIを選んでいない または 改行の仕方が不正です!");
             throw asErr;   
+        }
+    }
+    
+    @Test
+    public void testPromptMessage()
+    {
+        // action
+        in.inputln("The tests  are currently failing."); // 標準入力をテストする場合
+        // Hello.main(new String[]{"1", "2", "3"}); // 実行時引数をテストする場合
+        Prog63.main(null);
+
+        // assertion
+        String msg = "英文を入力してください";
+        try {
+            String[] prints = bos.toString().split(System.lineSeparator());
+            assertTrue( prints[0].contains(msg), "プログラムからのメッセージが「" + msg +"」ではありません!");
+        } catch (AssertionError err) {
+            after();
+            throw err;   
         }
     }
 }
