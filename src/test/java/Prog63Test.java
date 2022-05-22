@@ -5,7 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import java.io.*;
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * @version (20220510)
+ * @version (20220522)
+ *   suporting both println and print("\n") on Windows
  **/
 public class Prog63Test {
     InputStream originalIn;
@@ -41,7 +42,7 @@ public class Prog63Test {
         Prog63.main(null);
 
         // assertion
-        String[] prints = bos.toString().split(System.lineSeparator());
+        String prints[] = bos.toString().split("\r\n|\n");
         try {
             assertEquals( "mismatch.", prints[prints.length - 1]);
             assertEquals( "output", prints[prints.length - 2]);
@@ -68,8 +69,8 @@ public class Prog63Test {
         Prog63.main(null);
 
         // assertion
+        String prints[] = bos.toString().split("\r\n|\n");
         try {
-            String[] prints = bos.toString().split(System.lineSeparator());
             assertEquals( "mismatch.", prints[prints.length - 1]);
             assertEquals( "output", prints[prints.length - 2]);
             assertEquals( "an", prints[prints.length - 3]);
@@ -95,8 +96,8 @@ public class Prog63Test {
         Prog63.main(null);
 
         // assertion
+        String prints[] = bos.toString().split("\r\n|\n");
         try {
-            String[] prints = bos.toString().split(System.lineSeparator());
             assertEquals( "mismatch.", prints[prints.length - 1]);
             assertEquals( "output", prints[prints.length - 2]);
             assertEquals( "an", prints[prints.length - 3]);
@@ -124,7 +125,7 @@ public class Prog63Test {
         // assertion
         String msg = "英文を入力してください";
         try {
-            String[] prints = bos.toString().split(System.lineSeparator());
+            String[] prints = bos.toString().split("\r\n|\n");
             assertTrue( prints[0].contains(msg), "プログラムからのメッセージが「" + msg +"」ではありません!");
         } catch (AssertionError err) {
             after();
