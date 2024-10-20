@@ -1,0 +1,64 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: testTokenizedResults
+      id: testtokenizedresults
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testTokenizedResults
+        setup-command: ''
+        command: sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog63Test.testTokenizedResults"
+        timeout: 10
+        max-score: 3
+    - name: testMultipleSpaces
+      id: testmultiplespaces
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testMultipleSpaces
+        setup-command: ''
+        command: sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog63Test.testMultipleSpaces"
+        timeout: 10
+        max-score: 2
+    - name: testTab
+      id: testtab
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testTab
+        setup-command: ''
+        command: sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog63Test.testTab"
+        timeout: 10
+        max-score: 2
+    - name: testPromptMessage
+      id: testpromptmessage
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPromptMessage
+        setup-command: ''
+        command: sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog63Test.testPromptMessage"
+        timeout: 10
+        max-score: 3
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTTOKENIZEDRESULTS_RESULTS: "${{steps.testtokenizedresults.outputs.result}}"
+        TESTMULTIPLESPACES_RESULTS: "${{steps.testmultiplespaces.outputs.result}}"
+        TESTTAB_RESULTS: "${{steps.testtab.outputs.result}}"
+        TESTPROMPTMESSAGE_RESULTS: "${{steps.testpromptmessage.outputs.result}}"
+      with:
+        runners: testtokenizedresults,testmultiplespaces,testtab,testpromptmessage
